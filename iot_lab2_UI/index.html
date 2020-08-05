@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      .container{
+                  display: flex;
+                }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./utils.js"></script>
+    
+  </head>
+
+  <body>
+    <div class="container">
+  
+      <div class="jumbotron">
+      <h2>CS498: IoT -- Lab 2</h2>
+
+      <video class="center" width="600" height="400" controls>
+        <source src="samplevid.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+    </div> 
+  
+  </div>
+
+  <div class="row">
+    <div class="container">
+        <div class="jumbotron text-center col-md-6">
+            <span>&nbsp;&nbsp;</span> 
+            <span id="upArrow" style='font-size:50px; color:grey;'>&#8679;</span>
+            <br>
+            <span id="leftArrow" style='font-size:45px; color:grey;'>&#8678;</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+            <span id="rightArrow" style='font-size:45px; color:grey;'>&#8680;</span>
+            <br>
+            <span>&nbsp;&nbsp;</span> 
+            <span id="downArrow" style='font-size:50px; color:grey;'>&#8681;</span>
+        </div>
+
+        <div class="jumbotron text-left col-md-6">
+          <p>
+           <span id="obstacle_dot" style="color:red">&bull;</span> &MediumSpace; Obstacle &MediumSpace; Distance: <span id="distance">- - -</span>  
+           <br>
+           <span id="cliff_dot" style="color:grey">&bull;</span> &MediumSpace; Cliff Detected
+           <br>
+           <span id="Sign_dot" style="color:Green">&bull;</span> &MediumSpace; Sign Detected: <span id="white_noise">Stop Sign</span>  
+          </p>  
+        </div>
+    </div>
+</div>
+
+  </body>
+</html>
