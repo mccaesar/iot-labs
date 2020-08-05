@@ -118,6 +118,15 @@ class LightningMcqueen:
     angle_increment = 5
     length_per_position = 2.5 #5 cm / position in numpy array
     houser_boon = HouserBoon()
+    target = (150, 150)
+    direction = 0
+
+    def __init__(self, target):
+        self.target = target
+        self.map_to_fill = np.zeros((150, 150))
+        self.position = (self.map_to_fill.shape[0]*.5, 0)
+        self.rescan_limit = 10
+
     def findMove(current, prev):
         if current[1] == prev[1] + 1:
             return "forward"
@@ -126,19 +135,22 @@ class LightningMcqueen:
         if current[0] == prev[0] - 1:
             return "up"
 
-    def kachow(self):
-        
+    def lets_do_this_thing(self, map_to_fill):
         map_to_fill = scan_and_build_map(60, map_to_fill)
         np.set_printoptions(threshold=np.inf)
-
         printmat(map_to_fill.astype(int))
 
-        rec = a_star_recommendation(map_to_fill, (39, 39))
+        start = (map_to_fill.shape[0]*.5, 0)
+        rec = a_star_recommendation(map_to_fill, self.target)
+        
 
-        starting_coordinate = (map_to_fill.shape[0]*.5, 0)
+        start = self.position
 
-        direction = 0
+        starting_coordinate = self.position
+
+        direction = self.direction
         prev = starting_coordinate
+
 
         # def turnRight():
         #     print("right")
@@ -147,48 +159,75 @@ class LightningMcqueen:
         # def move25(): 
         #     print("forward")
 
-        for coordinate in rec:
+        # direction 0 = east
+        # direction 1 = south
+        # direction -1 = north
+        for i in range(min(len(rec), self.rescan_limit)):
+            coordinate = rec[i]
+
             while (houser_boon.show_us_the_bolt()):
                 time.sleep(3)
                 print("STOP") 
             if direction == 0 and findMove(coordinate, prev) == "forward":
                 move25()
+                self.position[0] += self.length_per_position
+
             elif direction == 1 and findMove(coordinate, prev) == "forward":
                 turnLeft()
                 move25()
                 direction = 0
+                self.position[0] += self.length_per_position
+
             elif direction == -1 and findMove(coordinate, prev) == "forward":
                 turnRight()
                 move25()
                 direction = 0
+                self.position[0] += self.length_per_position
 
             if direction == 0 and findMove(coordinate, prev) == "down":
                 turnRight()
                 move25()
                 direction = 1
+                self.position[1] -= self.length_per_position
+
             elif direction == 1 and findMove(coordinate, prev) == "down":
                 move25()
+                self.position[1] -= self.length_per_position
+
             elif direction == -1 and findMove(coordinate, prev) == "down":
                 turnRight()
                 turnRight()
                 move25()
                 direction = 1
+                self.position[1] -= self.length_per_position
 
             elif direction == 0 and findMove(coordinate, prev) == "up":
                 turnLeft()
                 move25()
                 direction = -1
+                self.position[1] += self.length_per_position
+
             elif direction == 1 and findMove(coordinate, prev) == "up":
                 turnLeft()
                 turnLeft()
                 move25()
                 direction = -1
+                self.position[1] += self.length_per_position
+
             elif direction == -1 and findMove(coordinate, prev) == "up":
                 move25()
-
+                self.position[1] += self.length_per_position
+            
             map_to_fill[int(coordinate[0]), coordinate[1]] = 6
             prev = coordinate
-    
+        self.target[0] -= position[0]
+        self.target[1] -= position[1]
+        self.direction = direction
+            
+    def kachow(self):
+        while(lets_do_this_thing(self.map_to_fill)):
+            print("Scanned")
+
     def move25():
         speed4 = Speed(25)
         speed4.start()
@@ -265,7 +304,6 @@ class LightningMcqueen:
 
     def a_star_recommendation(map_to_fill, target_coordinates):
         open = []
-        start = (map_to_fill.shape[0]*.5, 0)
         heapq.heappush(open, (0, start))
         traversal = {}
         cost = {}
