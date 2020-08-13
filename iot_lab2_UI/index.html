@@ -9,6 +9,7 @@
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="./utils.js"></script>
     
   </head>
@@ -19,10 +20,12 @@
       <div class="jumbotron">
       <h2>CS498: IoT -- Lab 2</h2>
 
-      <video class="center" width="600" height="400" controls>
+      <!-- <video class="center" width="600" height="400" controls>
         <source src="samplevid.mp4" type="video/mp4">
           Your browser does not support the video tag.
-      </video>
+      </video> -->
+      <img src="./media/default_background.png" id='pics'>
+      <script>updateVideo()</script>
     </div> 
   
   </div>
@@ -47,7 +50,9 @@
            <br>
            <span id="cliff_dot" style="color:grey">&bull;</span> &MediumSpace; Cliff Detected
            <br>
-           <span id="Sign_dot" style="color:Green">&bull;</span> &MediumSpace; Sign Detected: <span id="white_noise">Stop Sign</span>  
+           <span id="Sign_dot" style="color:Green">&bull;</span> &MediumSpace; Sign Detected: <span id="detected_sign">Stop Sign</span>  
+           <br>
+           Bluetooth return value: <span id="bluetooth"> </span>
           </p>  
         </div>
     </div>
@@ -55,3 +60,4 @@
 
   </body>
 </html>
+
