@@ -53,6 +53,16 @@ function resetKey(e) {
     document.getElementById("rightArrow").style.color = "grey";
 }
 
+//  submit bluetooth serial number
+function submit_bt_num(){
+
+    document.getElementById("bt_feedback").innerHTML = "Waiting...";
+    // get serial number from user, send to python backend, then give feedback
+    var bt_num = document.getElementById("bt_num").value;
+    send_data(bt_num);
+    document.getElementById("bt_feedback").innerHTML = "Success!";
+    
+}
 
 // get the video frames from the opencv python backend
 function get_frame() {
