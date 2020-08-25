@@ -48,15 +48,7 @@ def start_client():
     first_match = service_matches[0]
     port = first_match["port"]
     name = first_match["name"]
-    host = first_match["host"]
-
-    for matches in service_matches:
-        port1 = matches["port"]
-        name1 = matches["name"]
-        host1 = matches["host"]
-
-        print("Found: \"{}\" on {}".format(name1, host1))
-        
+    host = first_match["host"]        
 
     print("Connecting to \"{}\" on {}".format(name, host))
 
