@@ -9,8 +9,7 @@
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="./utils.js"></script>
+    <script src="./index.js"></script>
     
   </head>
 
@@ -25,7 +24,6 @@
           Your browser does not support the video tag.
       </video> -->
       <img src="./media/default_background.png" id='pics'>
-      <button class="btn btn-success" onclick="updateVideo()">Get Video</button>
     </div> 
   
   </div>
@@ -45,15 +43,16 @@
         </div>
 
         <div class="jumbotron text-left col-md-6">
-        <input id="bt_num" type="text" placeholder="Bluetooth Serial Number"/>
-        <button class="btn btn-success" onclick="submit_bt_num()">Sumbit</button>
-        <span id="bt_feedback"> </span>
+        <input id="message" type="text" placeholder="message to Pi"/>
+        <button class="btn btn-success" onclick="update_data()">Sumbit</button>
           <p>
-           <span id="obstacle_dot" style="color:red">&bull;</span> &MediumSpace; Obstacle &MediumSpace; Distance: <span id="distance">- - -</span>  
+            <span id="direction_dot" style="color:Green">&bull;</span> Car Direction: <span id="direction"> </span>
            <br>
-           <span id="cliff_dot" style="color:grey">&bull;</span> &MediumSpace; Cliff Detected
+           <span id="speed_dot" style="color:green">&bull;</span> Speed: <span id="speed">0.0</span>  
            <br>
-           <span id="Sign_dot" style="color:Green">&bull;</span> &MediumSpace; Sign Detected: <span id="detected_sign">Stop Sign</span>  
+           <span id="distance_dot" style="color:green">&bull;</span> Distance Traveled: <span id="distance">0.0</span>
+           <br>
+           <span id="temprature_dot" style="color:green">&bull;</span> Temperature of the Pi: <span id="temperature">0.0</span>
            <br>
            Bluetooth return value: <span id="bluetooth"> </span>
           </p>  
